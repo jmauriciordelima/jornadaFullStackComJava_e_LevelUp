@@ -27,19 +27,22 @@ public class TamanhoPalavra {
     }
 
     public void menu() {
-        String menu = "---- Escolha uma das opções ----" +
-                "\n1 - adicionar" +
-                "\n2 - remover" +
-                "\n3 - listar" +
-                "\n4 - Busca por nome" +
-                "\n5 - Ordenar lista" +
-                "\n6 - sair" +
-                "\n";
+        String menu = "╔════════════════════════════════╗" +
+"\n║     GERENCIADOR DE NOMES       ║" +
+"\n╠════════════════════════════════╣" +
+"\n║ [1] Adicionar nome             ║" +
+"\n║ [2] Remover nome               ║" +
+"\n║ [3] Listar por tamanho         ║" +
+"\n║ [4] Buscar nome                ║" +
+"\n║ [5] Ordenar lista              ║" +
+"\n║ [6] Ver todos os nomes         ║" +
+"\n║ [0] Sair                       ║" +
+"\n╚════════════════════════════════╝" +
+"\n→ ";
 
         do {
 
-            System.out.print(menu +
-                    "\n-> ");
+            System.out.print(menu);
 
             String entradaUsuarioMenu = entrada.nextLine().toUpperCase();
 
@@ -66,6 +69,10 @@ public class TamanhoPalavra {
                     break;
 
                 case "6":
+                    listarTodosOsNomes();
+                    break;
+
+                case "0":
                     System.out.println("Finalizando...");
                     validarOpcao = false;
                     break;
@@ -76,6 +83,26 @@ public class TamanhoPalavra {
 
 
         } while (validarOpcao);
+    }
+
+    private void listarTodosOsNomes() {
+
+        if (verificaLista()) {
+            return;
+        }
+
+        String cabecalho = "\n---- Lista de nomes ----\n";
+
+        System.out.println(cabecalho);
+
+        for (int i = 0; i < listaDeNomes.size(); i++) {
+
+            System.out.println((i + 1) + " - " + listaDeNomes.get(i));
+
+        }
+
+        System.out.println();
+
     }
 
     private void remover() {
@@ -176,7 +203,7 @@ public class TamanhoPalavra {
 
         System.out.println(menu);
 
-        try {
+
             String opcao = entrada.nextLine();
 
             switch (opcao) {
@@ -194,9 +221,7 @@ public class TamanhoPalavra {
                     System.out.println("Opção inválida!");
 
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Erro: Digite um número válido!");
-        }
+
     }
 
 
