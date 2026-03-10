@@ -8,37 +8,38 @@ public class TamanhoPalavra {
 
     private ArrayList<String> listaDeNomes = new ArrayList<>();
     private boolean validarOpcao = true;
-    private Scanner entrada = new Scanner(System.in);
+    private final Scanner entrada = new Scanner(System.in);
 
     public TamanhoPalavra() {
         this.listaDeNomes = new ArrayList<>();
     }
 
 
-    private void adicionar() {
-
-        System.out.print("Adicionar -> ");
-        String entradaUsuarioParaAdicionar = entrada.nextLine().toUpperCase();
-        if (verificarListaPorNome(entradaUsuarioParaAdicionar)) {
-            System.out.println(entradaUsuarioParaAdicionar + " já existe.");
-            return;
-        }
-        listaDeNomes.add(entradaUsuarioParaAdicionar);
-    }
-
     public void menu() {
-        String menu = "╔════════════════════════════════╗" +
-"\n║     GERENCIADOR DE NOMES       ║" +
-"\n╠════════════════════════════════╣" +
-"\n║ [1] Adicionar nome             ║" +
-"\n║ [2] Remover nome               ║" +
-"\n║ [3] Listar por tamanho         ║" +
-"\n║ [4] Buscar nome                ║" +
-"\n║ [5] Ordenar lista              ║" +
-"\n║ [6] Ver todos os nomes         ║" +
-"\n║ [0] Sair                       ║" +
-"\n╚════════════════════════════════╝" +
-"\n→ ";
+        String menu = """
+                ╔════════════════════════════════╗\
+                
+                ║     GERENCIADOR DE NOMES       ║\
+                
+                ╠════════════════════════════════╣\
+                
+                ║ [1] Adicionar nome             ║\
+                
+                ║ [2] Remover nome               ║\
+                
+                ║ [3] Listar por tamanho         ║\
+                
+                ║ [4] Buscar nome                ║\
+                
+                ║ [5] Ordenar lista              ║\
+                
+                ║ [6] Ver todos os nomes         ║\
+                
+                ║ [0] Sair                       ║\
+                
+                ╚════════════════════════════════╝\
+                
+                →\s""";
 
         do {
 
@@ -85,33 +86,30 @@ public class TamanhoPalavra {
         } while (validarOpcao);
     }
 
-    private void listarTodosOsNomes() {
+    private void adicionar() {
 
-        if (verificaLista()) {
+        System.out.print("Adicionar -> ");
+        String entradaUsuarioParaAdicionar = entrada.nextLine().toUpperCase();
+        if (verificarListaPorNome(entradaUsuarioParaAdicionar)) {
+            System.out.println(entradaUsuarioParaAdicionar + " já existe.");
             return;
         }
-
-        String cabecalho = "\n---- Lista de nomes ----\n";
-
-        System.out.println(cabecalho);
-
-        for (int i = 0; i < listaDeNomes.size(); i++) {
-
-            System.out.println((i + 1) + " - " + listaDeNomes.get(i));
-
-        }
-
-        System.out.println();
-
+        listaDeNomes.add(entradaUsuarioParaAdicionar);
     }
 
     private void remover() {
 
-        String menu = "Remover por NOME ou por NÚMERO?\n" +
-                "\n1 - NOME" +
-                "\n2 - NÚMERO" +
-                "\n3 - VOLTAR" +
-                "\n -> ";
+        String menu = """
+                Remover por NOME ou por NÚMERO?
+                
+                1 - NOME\
+                
+                2 - NÚMERO\
+                
+                3 - VOLTAR\
+                
+                 →\s""";
+
         int antesDaRemocao = listaDeNomes.size();
 
         if (verificaLista()) {
@@ -167,11 +165,29 @@ public class TamanhoPalavra {
 
     }
 
+    private void listarTodosOsNomes() {
+
+        if (verificaLista()) {
+            return;
+        }
+
+        String cabecalho = "\n---- Lista de nomes ----\n";
+
+        System.out.println(cabecalho);
+
+        for (int i = 0; i < listaDeNomes.size(); i++) {
+
+            System.out.println((i + 1) + " - " + listaDeNomes.get(i));
+
+        }
+
+        System.out.println();
+
+    }
+
     private boolean verificarListaPorNome(String usuarioParaRemocao) {
 
-        boolean encontrou = listaDeNomes.contains(usuarioParaRemocao);
-
-        return encontrou;
+        return listaDeNomes.contains(usuarioParaRemocao);
     }
 
     private boolean verificarListaPorIndice(int posicaoInformada) {
@@ -196,9 +212,14 @@ public class TamanhoPalavra {
             return;
         }
 
-        String menu = "Digite [1] para Nomes maiores que 5 letras" +
-                "\nDigite [2] para Nomes menores que 5 letras" +
-                "\nDigite [3] para Voltar ao Menu inicial.";
+        String menu = """
+                Digite [1] para Nomes maiores que 5 letras\
+                
+                Digite [2] para Nomes menores que 5 letras\
+                
+                Digite [3] para Voltar ao Menu inicial.\
+                
+                →\s""";
 
 
         System.out.println(menu);
@@ -291,9 +312,14 @@ public class TamanhoPalavra {
             return;
         }
 
-        String menu = "\n1 - Ordem alfavética (A - Z)" +
-                "\n2 - Ordem reversa (Z - A)" +
-                "\n3 - Voltar\n-> ";
+        String menu = """
+                
+                1 - Ordem alfavética (A - Z)\
+                
+                2 - Ordem reversa (Z - A)\
+                
+                3 - Voltar
+                →\s""";
 
         System.out.println(menu);
         String opcao = entrada.nextLine().trim();
