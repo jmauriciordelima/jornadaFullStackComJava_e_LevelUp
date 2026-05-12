@@ -16,6 +16,7 @@ public class TamanhoPalavra {
 
 
     public void menu() {
+
         String menu = """
                 ╔════════════════════════════════╗\
                 
@@ -195,9 +196,9 @@ public class TamanhoPalavra {
 
     }
 
-    private boolean verificarListaPorNome(String usuarioParaRemocao) {
+    private boolean verificarListaPorNome(String verificaNome) {
 
-        return listaDeNomes.contains(usuarioParaRemocao);
+        return listaDeNomes.contains(verificaNome);
     }
 
     private boolean verificarListaPorIndice(int posicaoInformada) {
@@ -208,7 +209,7 @@ public class TamanhoPalavra {
             String nomeRemovido = listaDeNomes.get(indiceReal);
             listaDeNomes.remove(indiceReal);
 
-            System.out.println("Nome: [" + nomeRemovido + "] na posicao [" + posicaoInformada + "]  " + "removido com sucesso!\n");
+            System.out.println("Nome: [" + nomeRemovido + "] na posicao [" + posicaoInformada + "] removido com sucesso!\n");
             return true;
         }
 
@@ -262,7 +263,7 @@ public class TamanhoPalavra {
             return;
         }
 
-        System.out.println("Digite o nome do qual deseja buscar: ");
+        System.out.println("DIGITE O NOME A SER BUSCADO: ");
         String nome = entrada.nextLine().toUpperCase();
 
         int indice = listaDeNomes.indexOf(nome);
@@ -270,15 +271,8 @@ public class TamanhoPalavra {
         if (indice != -1) {
             System.out.println("\n[" + nome + "] - ENCONTRADO NA POSIÇÃO " + (indice + 1));
         } else {
-            System.out.println("\n[" + nome + "] - não encontrado.");
+            System.out.println("\n[" + nome + "] - NÃO ENCONTRADO.");
         }
-    }
-
-    private int tamanhoLista() {
-
-        verificaLista();
-
-        return listaDeNomes.size();
     }
 
     private void listarNomesPorTamanho(int tamanhoMinimo, int tamanhoMaximo) {
@@ -305,15 +299,22 @@ public class TamanhoPalavra {
 
     }
 
+    private int tamanhoLista() {
+
+        verificaLista();
+
+        return listaDeNomes.size();
+    }
+
     private boolean verificaLista() {
 
-        boolean empty = listaDeNomes.isEmpty();
+        boolean vazio = listaDeNomes.isEmpty();
 
-        if (empty) {
+        if (vazio) {
             System.out.println("\n*** LISTA VAZIA ***\n");
         }
 
-        return empty;
+        return vazio;
     }
 
     private void ordenarLista() {
