@@ -563,7 +563,7 @@ public class Estatistica {
 
             default:
                 System.out.print("""
-                        ║ OPÇÃO INVÁLIDA, DIGIE UMA OPÇÃO VÁLIDA.\
+                        ║ OPÇÃO INVÁLIDA, DIGITE UMA OPÇÃO VÁLIDA.\
                         
                         ╚════════════════════════════════════════╝\
                         
@@ -802,11 +802,9 @@ public class Estatistica {
 
         int total = 0;
 
-        char letraBusca = letra;
-
         for (String nome : listaDeNomes) {
             for (char c : nome.toCharArray()) {
-                if (c == letraBusca) {
+                if (c == letra) {
                     total++;
                 }
             }
