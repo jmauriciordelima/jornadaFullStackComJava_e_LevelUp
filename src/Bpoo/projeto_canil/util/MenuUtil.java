@@ -1,7 +1,13 @@
 package Bpoo.projeto_canil.util;
 
 /**
- * Classe utilitária para formatação e exibição de componentes da interface CLI.
+ * Classe utilitária responsável pela exibição
+ * e formatação da interface textual do sistema.
+ *
+ * Todos os métodos são estáticos.
+ *
+ * @author José Maurício
+ * @version 1.0
  */
 public class MenuUtil {
 
@@ -30,6 +36,7 @@ public class MenuUtil {
 
     /**
      * Centraliza títulos de seções para melhor legibilidade no terminal.
+     *
      * @param titulo Título a ser exibido.
      */
     public static void exibirCabecalho(String titulo) {
@@ -46,16 +53,27 @@ public class MenuUtil {
 
     /**
      * Exibe mensagens de feedback positivo.
+     *
      * @param mensagem Texto da mensagem de sucesso.
      */
     public static void exibirMensagemSucesso(String mensagem) {
         System.out.println("✅ " + mensagem);
     }
 
+    /**
+     * Exibe uma mensagem de erro formatada.
+     *
+     * @param mensagem texto da mensagem.
+     */
     public static void exibirMensagemErro(String mensagem) {
         System.out.println("❌ " + mensagem);
     }
 
+    /**
+     * Exibe uma mensagem informativa formatada.
+     *
+     * @param mensagem texto da mensagem.
+     */
     public static void exibirMensagemInfo(String mensagem) {
         System.out.println("ℹ\uFE0F " + mensagem);
     }

@@ -1,19 +1,30 @@
 package Bpoo.projeto_canil.servico;
 
 import Bpoo.projeto_canil.modelo.Cachorro;
+import Bpoo.projeto_canil.modelo.FaseVida;
 import Bpoo.projeto_canil.repositorio.CanilRepository;
 import Bpoo.projeto_canil.util.MenuUtil;
 
 import java.util.ArrayList;
 
 /**
- * Contém a regra de negócio do sistema.
- * Processa dados providos pelo {@link CanilRepository}.
+ * Camada responsável pelas regras de negócio.
+ *
+ * Realiza cálculos, filtros e estatísticas
+ * utilizando os dados fornecidos pelo repositório.
+ *
+ * @author José Maurício
+ * @version 1.0
  */
 public class CanilService {
 
     private CanilRepository repository;
 
+    /**
+     * Cria uma instância do serviço.
+     *
+     * @param repository repositório utilizado pelo serviço.
+     */
     public CanilService(CanilRepository repository) {
         this.repository = repository;
     }
@@ -41,7 +52,12 @@ public class CanilService {
 
     }
 
-    public Cachorro buscarMenorIdade() {
+    /**
+     * Localiza o cachorro mais novo do canil.
+     *
+     * @return cachorro com menor idade ou null.
+     */
+    public Cachorro buscarMaisNovo() {
         // Idêntico ao buscarMaisVelho, muda só a comparação
         if (repository.estaVazio()) {
             return null;
@@ -87,12 +103,12 @@ public class CanilService {
      * @param fase Fase da vida (ex: "Filhote").
      * @return Uma lista contendo apenas os cachorros daquela fase.
      */
-    public ArrayList<Cachorro> listarPorFase(String fase) {
+    public ArrayList<Cachorro> listarPorFase(FaseVida fase) {
         // 1. Criar lista resultado vazia
         ArrayList<Cachorro> faseDaVida = new ArrayList<>();
         // 2. Loop pela lista
         for (Cachorro cachorro : repository.listarTodos()) {
-            if (cachorro.faseDaVida().equalsIgnoreCase(fase)) {
+            if (cachorro.faseDaVida() == fase) {
                 faseDaVida.add(cachorro);
             }
         }
@@ -121,7 +137,7 @@ public class CanilService {
                     maisVelho.getIdade());
         }
 
-        Cachorro maisNovo = buscarMenorIdade();
+        Cachorro maisNovo = buscarMaisNovo();
 
         if (maisNovo != null) {
             System.out.printf("Menor idade: %s (%d idade.)%n",
@@ -129,9 +145,9 @@ public class CanilService {
                     maisNovo.getIdade());
         }
 
-        System.out.println("Filhotes: " + listarPorFase("Filhote").size());
-        System.out.println("Adultos: " + listarPorFase("Adulto").size());
-        System.out.println("Idosos: " + listarPorFase("Idoso").size());
+//        System.out.println("Filhotes: " + listarPorFase("Filhote").size());
+//        System.out.println("Adultos: " + listarPorFase("Adulto").size());
+//        System.out.println("Idosos: " + listarPorFase("Idoso").size());
     }
 
 }

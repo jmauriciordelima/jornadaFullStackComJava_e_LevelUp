@@ -1,8 +1,14 @@
 package Bpoo.projeto_canil.modelo;
 
 /**
- * Entidade que representa um cachorro no sistema.
- * Contém regras de negócio para cálculo de idade e identificação de fase da vida.
+ * Entidade que representa um cachorro cadastrado no sistema.
+ * <p>
+ * Contém informações básicas como nome, raça e idade,
+ * além de regras de negócio relacionadas à fase da vida
+ * e cálculos derivados da idade.
+ *
+ * @author José Maurício
+ * @version 1.0
  */
 public class Cachorro {
 
@@ -46,24 +52,33 @@ public class Cachorro {
      *
      * @return Uma String indicando se é "Filhote", "Adulto" ou "Idoso".
      */
-    public String faseDaVida() {
-        String faseDaVida = "";
+    public FaseVida faseDaVida() {
 
         if (this.idade > 10) {
-            faseDaVida = "Idoso";
+            return FaseVida.IDOSO;
         } else if (this.idade <= 10 && this.idade > 2) {
-            faseDaVida = "Adulto";
+            return FaseVida.ADULTO;
         } else {
-            faseDaVida = "Filhote";
+            return FaseVida.FILHOTE;
         }
 
-        return faseDaVida;
     }
 
+    /**
+     * Converte a idade do cachorro para meses.
+     *
+     * @return idade em meses.
+     */
     private int calcularIdadeEmMeses() {
         return getIdade() * 12;
     }
 
+    /**
+     * Calcula uma equivalência simplificada da idade
+     * do cachorro em anos humanos.
+     *
+     * @return idade humana equivalente.
+     */
     private int calcularIdadeHumana() {
         return getIdade() * 7;
     }
@@ -79,6 +94,11 @@ public class Cachorro {
         return String.format("%s fez aniversário, sua nova idade agora é %s", getNome(), formatarMensagemIdade());
     }
 
+    /**
+     * Formata a idade utilizando singular ou plural.
+     *
+     * @return idade formatada para exibição.
+     */
     private String formatarMensagemIdade() {
         if (getIdade() == 1) {
             return getIdade() + " ano.";
@@ -109,11 +129,18 @@ public class Cachorro {
                 """, getNome(), getIdade(), faseDaVida(), calcularIdadeEmMeses(), calcularIdadeHumana(), getNome(), getRaca(), formatarMensagemIdade());
     }
 
-    // Getters e Setters omitidos por brevidade, mas devem ser documentados se forem parte de API pública.
+    /**
+     * @return nome do cachorro.
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Define o nome do cachorro.
+     *
+     * @param nome novo nome.
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -122,7 +149,9 @@ public class Cachorro {
         return raca;
     }
 
-    public void setRaca(String raca) { this.raca = raca; }
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
 
     public int getIdade() {
         return idade;

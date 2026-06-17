@@ -1,6 +1,7 @@
 package Bpoo.projeto_canil;
 
 import Bpoo.projeto_canil.modelo.Cachorro;
+import Bpoo.projeto_canil.modelo.FaseVida;
 import Bpoo.projeto_canil.repositorio.CanilRepository;
 import Bpoo.projeto_canil.servico.CanilService;
 import Bpoo.projeto_canil.util.MenuUtil;
@@ -8,20 +9,40 @@ import Bpoo.projeto_canil.util.MenuUtil;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe principal da aplicação.
+ *
+ * Responsável por inicializar o sistema,
+ * carregar os dados persistidos e controlar
+ * o fluxo de execução do programa.
+ *
+ * @author José Maurício
+ * @version 1.0
+ */
 public class Main {
 
-    private static CanilRepository repository = new CanilRepository();
-    private static CanilService service = new CanilService(repository);
-    private static Scanner scanner = new Scanner(System.in);
+    private static final CanilRepository repository = new CanilRepository();
+    private static final CanilService service = new CanilService(repository);
+    private static final Scanner scanner = new Scanner(System.in);
     private static boolean executando = true;
     private static final String ARQUIVO = "canil.txt";
 
+    /**
+     * Ponto de entrada da aplicação.
+     *
+     * @param args argumentos recebidos pela JVM.
+     */
     public static void main(String[] args) {
 
         iniciarMenu();
 
     }
 
+    /**
+     * Executa o loop principal do sistema,
+     * exibindo o menu e processando as
+     * opções selecionadas pelo usuário.
+     */
     public static void iniciarMenu() {
 
         repository.carregarDeArquivo(ARQUIVO);
@@ -151,26 +172,26 @@ public class Main {
                             [3] - IDOSO
                             """);
 
-                    String fase = "";
+                    String fase = scanner.nextLine();
+                    FaseVida faseVida = null;
 
-                    String faseVida = scanner.nextLine();
-                    switch (faseVida) {
+                    switch (fase) {
 
                         case "1":
-                            fase = "FILHOTE";
+                            faseVida = FaseVida.FILHOTE;
                             break;
                         case "2":
-                            fase = "ADULTO";
+                            faseVida = FaseVida.ADULTO;
                             break;
                         case "3":
-                            fase = "IDOSO";
+                            faseVida = FaseVida.IDOSO;
                             break;
                         default:
                             MenuUtil.exibirMensagemErro("- OPÇÃO INVÁLIDA");
                             break;
                     }
 
-                    List<Cachorro> lista = service.listarPorFase(fase);
+                    List<Cachorro> lista = service.listarPorFase(faseVida);
                     if (lista.isEmpty()) {
                         MenuUtil.exibirMensagemInfo("NENHUM CACHORRO NESSA FASE");
                     } else {
@@ -192,7 +213,7 @@ public class Main {
                     MenuUtil.exibirCabecalho("MAIS VELHO / MAIS NOVO");
 
                     Cachorro cachorroMaisVelho = service.buscarMaisVelho();
-                    Cachorro cachorroMenorIdade = service.buscarMenorIdade();
+                    Cachorro cachorroMenorIdade = service.buscarMaisNovo();
 
                     System.out.printf("Mais velho: %s (%d idade)%n",
                             cachorroMaisVelho.getNome(),

@@ -8,7 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Responsável por gerenciar o armazenamento e persistência da coleção de cachorros.
+ * Responsável pela persistência e gerenciamento
+ * dos dados dos cachorros.
+ *
+ * Atua como camada de acesso aos dados
+ * armazenados em memória e em arquivo.
+ *
+ * @author José Maurício
+ * @version 1.0
  */
 public class CanilRepository {
 
@@ -39,11 +46,21 @@ public class CanilRepository {
         return cachorros;
     }
 
+    /**
+     * Verifica se existem cachorros cadastrados.
+     *
+     * @return true se não houver registros.
+     */
     public boolean estaVazio() {
 
         return cachorros.isEmpty();
     }
 
+    /**
+     * Retorna a quantidade total de cachorros.
+     *
+     * @return número de registros cadastrados.
+     */
     public int quantidadeTotal() {
 
         return cachorros.size();
@@ -106,10 +123,14 @@ public class CanilRepository {
     }
 
     /**
-     * Carrega a lista de cachorros a partir de um arquivo .txt.
+     * Carrega todos os registros persistidos
+     * em arquivo texto.
      *
-     * @param arquivoCachorro Nome do arquivo de origem.
-     * @return A lista de cachorros carregada do arquivo.
+     * Caso o arquivo não exista,
+     * retorna uma lista vazia.
+     *
+     * @param arquivoCachorro caminho do arquivo.
+     * @return lista de cachorros carregados.
      */
     public List<Cachorro> carregarDeArquivo(String arquivoCachorro) {
         this.cachorros = new ArrayList<>();
