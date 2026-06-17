@@ -9,7 +9,6 @@ public class Cachorro {
     private String nome;
     private String raca;
     private int idade;
-    private boolean latindo;
 
     /**
      * Construtor padrão para inicialização.
@@ -41,20 +40,6 @@ public class Cachorro {
         this.idade = idade;
     }
 
-    /**
-     * Construtor completo.
-     *
-     * @param nome    O nome do cachorro.
-     * @param raca    A raça do cachorro.
-     * @param idade   A idade em anos.
-     * @param latindo Estado atual do cachorro (true se estiver latindo).
-     */
-    public Cachorro(String nome, String raca, int idade, boolean latindo) {
-        this.nome = nome;
-        this.raca = raca;
-        this.idade = idade;
-        this.latindo = latindo;
-    }
 
     /**
      * Determina a fase da vida do cachorro com base na idade.
@@ -137,9 +122,7 @@ public class Cachorro {
         return raca;
     }
 
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
+    public void setRaca(String raca) { this.raca = raca; }
 
     public int getIdade() {
         return idade;
@@ -149,11 +132,4 @@ public class Cachorro {
         this.idade = idade;
     }
 
-    public boolean isLatindo() {
-        return latindo;
-    }
-
-    public void setLatindo(boolean latindo) {
-        this.latindo = latindo;
-    }
 }

@@ -1,6 +1,7 @@
 package Bpoo.projeto_canil.repositorio;
 
 import Bpoo.projeto_canil.modelo.Cachorro;
+import Bpoo.projeto_canil.util.MenuUtil;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class CanilRepository {
 
     /**
      * Adiciona um novo cachorro ao repositório em memória.
+     *
      * @param cachorro O objeto {@link Cachorro} a ser adicionado.
      */
     public void adicionar(Cachorro cachorro) {
@@ -29,6 +31,7 @@ public class CanilRepository {
 
     /**
      * Recupera todos os cachorros armazenados.
+     *
      * @return Uma {@link List} contendo todos os cachorros.
      */
     public ArrayList<Cachorro> listarTodos() {
@@ -48,6 +51,7 @@ public class CanilRepository {
 
     /**
      * Busca um cachorro pelo nome.
+     *
      * @param nome Nome para busca (case-insensitive).
      * @return O objeto Cachorro encontrado ou null caso não exista.
      */
@@ -63,6 +67,7 @@ public class CanilRepository {
 
     /**
      * Remove um cachorro do repositório baseado no nome.
+     *
      * @param nome Nome do cachorro a ser removido.
      * @return true se removido com sucesso, false caso contrário.
      */
@@ -80,27 +85,29 @@ public class CanilRepository {
 
     /**
      * Salva todos os cachorros atuais do sistema em um arquivo .txt.
+     *
      * @param arquivoCachorros Nome do arquivo de destino.
      */
     public void salvarEmArquivo(String arquivoCachorros) {
         try (PrintWriter escrever = new PrintWriter(new BufferedWriter(new FileWriter(arquivoCachorros)))) {
             for (Cachorro c : cachorros) {
-                escrever.printf("%s;%s;%d;%b%n",
+                escrever.printf("%s;%s;%d;%n",
                         c.getNome(),
                         c.getRaca(),
-                        c.getIdade(),
-                        c.isLatindo());
+                        c.getIdade());
+
             }
 
-            System.out.println("Arquivo salvo com sucesso!");
+            MenuUtil.exibirMensagemSucesso(" - ARQUIVO SALVO COM SUCESSO");
 
         } catch (IOException e) {
-            System.err.printf("Erro ao salvar o arquivo: %s", e.getMessage());
+            MenuUtil.exibirMensagemErro("ERRO AO SALVAR O ARQUIVO: " + e.getMessage());
         }
     }
 
     /**
      * Carrega a lista de cachorros a partir de um arquivo .txt.
+     *
      * @param arquivoCachorro Nome do arquivo de origem.
      * @return A lista de cachorros carregada do arquivo.
      */
@@ -116,18 +123,17 @@ public class CanilRepository {
             String linha;
             while ((linha = ler.readLine()) != null) {
                 String[] dados = linha.split(";");
-                if (dados.length == 4) {
+                if (dados.length == 3) {
                     String nome = dados[0];
                     String raca = dados[1];
                     int idade = Integer.parseInt(dados[2]);
-                    boolean latindo = Boolean.parseBoolean(dados[3]);
 
-                    cachorros.add(new Cachorro(nome, raca, idade, latindo));
+                    cachorros.add(new Cachorro(nome, raca, idade));
                 }
             }
 
-        }catch (IOException | NumberFormatException e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+        } catch (IOException | NumberFormatException e) {
+            MenuUtil.exibirMensagemErro("ERRO AO LER O ARQUIVO: " + e.getMessage());
         }
         return cachorros;
     }
