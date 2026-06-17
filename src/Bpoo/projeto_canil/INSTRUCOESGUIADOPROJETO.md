@@ -71,7 +71,6 @@ src/
 - `nome` (String, private)
 - `raca` (String, private)
 - `idade` (int, private)
-- `latindo` (boolean, private)
 
 **Construtores:**
 
@@ -126,7 +125,7 @@ src/
 
 7. **salvarEmArquivo(String nomeArquivo)**
     - Salva todos os cachorros em arquivo .txt
-    - Formato de cada linha: `nome;raca;idade;latindo`
+    - Formato de cada linha: `nome;raca;idade`
     - Trata exceções de IO
 
 8. **carregarDeArquivo(String nomeArquivo)**

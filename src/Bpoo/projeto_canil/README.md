@@ -140,12 +140,12 @@ Idosos: 1
 Os dados são salvos em `canil.txt` com o seguinte formato CSV:
 
 ```
-REX;LABRADOR;3;false
-BOB;POODLE;5;true
-MAX;VIRA-LATA;12;false
+REX;LABRADOR;3;
+BOB;POODLE;5;
+MAX;VIRA-LATA;12;
 ```
 
-Campos: `nome;raca;idade;latindo`
+Campos: `nome;raca;idade`
 
 ---
 
