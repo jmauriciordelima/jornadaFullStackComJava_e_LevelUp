@@ -47,9 +47,9 @@ public class CanilRepository {
     }
 
     /**
-     * Busca um cachorro pelo nome (case-insensitive).
-     * @param nome O nome a ser buscado.
-     * @return O {@link Cachorro} encontrado ou {@code null} caso não exista.
+     * Busca um cachorro pelo nome.
+     * @param nome Nome para busca (case-insensitive).
+     * @return O objeto Cachorro encontrado ou null caso não exista.
      */
     public Cachorro buscarPorNome(String nome) {
 
@@ -61,6 +61,11 @@ public class CanilRepository {
         return null;
     }
 
+    /**
+     * Remove um cachorro do repositório baseado no nome.
+     * @param nome Nome do cachorro a ser removido.
+     * @return true se removido com sucesso, false caso contrário.
+     */
     public boolean removerPorNome(String nome) {
 
         Cachorro c = buscarPorNome(nome);
@@ -74,8 +79,8 @@ public class CanilRepository {
     }
 
     /**
-     * Persiste a lista de cachorros em um arquivo de texto.
-     * @param arquivoCachorros Caminho do arquivo para escrita.
+     * Salva todos os cachorros atuais do sistema em um arquivo .txt.
+     * @param arquivoCachorros Nome do arquivo de destino.
      */
     public void salvarEmArquivo(String arquivoCachorros) {
         try (PrintWriter escrever = new PrintWriter(new BufferedWriter(new FileWriter(arquivoCachorros)))) {
@@ -94,6 +99,11 @@ public class CanilRepository {
         }
     }
 
+    /**
+     * Carrega a lista de cachorros a partir de um arquivo .txt.
+     * @param arquivoCachorro Nome do arquivo de origem.
+     * @return A lista de cachorros carregada do arquivo.
+     */
     public List<Cachorro> carregarDeArquivo(String arquivoCachorro) {
         this.cachorros = new ArrayList<>();
         File arquivo = new File(arquivoCachorro);

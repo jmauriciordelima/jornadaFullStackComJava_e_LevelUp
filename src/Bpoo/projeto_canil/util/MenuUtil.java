@@ -1,7 +1,13 @@
 package Bpoo.projeto_canil.util;
 
+/**
+ * Classe utilitária para formatação e exibição de componentes da interface CLI.
+ */
 public class MenuUtil {
 
+    /**
+     * Desenha o menu principal no console com formatação estruturada.
+     */
     public static void exibirMenuPrincipal() {
         System.out.println("""
                 ╔════════════════════════════════╗
@@ -22,6 +28,10 @@ public class MenuUtil {
                 """);
     }
 
+    /**
+     * Centraliza títulos de seções para melhor legibilidade no terminal.
+     * @param titulo Título a ser exibido.
+     */
     public static void exibirCabecalho(String titulo) {
         int largura = 32;
         int sobrando = largura - titulo.length();
@@ -34,6 +44,10 @@ public class MenuUtil {
         System.out.println("╚════════════════════════════════╝");
     }
 
+    /**
+     * Exibe mensagens de feedback positivo.
+     * @param mensagem Texto da mensagem de sucesso.
+     */
     public static void exibirMensagemSucesso(String mensagem) {
         System.out.println("✅ " + mensagem);
     }

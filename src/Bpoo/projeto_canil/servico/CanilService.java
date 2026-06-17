@@ -82,6 +82,11 @@ public class CanilService {
 
     }
 
+    /**
+     * Filtra cachorros de acordo com a fase de vida informada.
+     * @param fase Fase da vida (ex: "Filhote").
+     * @return Uma lista contendo apenas os cachorros daquela fase.
+     */
     public ArrayList<Cachorro> listarPorFase(String fase) {
         // 1. Criar lista resultado vazia
         ArrayList<Cachorro> faseDaVida = new ArrayList<>();
@@ -96,6 +101,9 @@ public class CanilService {
         // 4. Retornar resultado
     }
 
+    /**
+     * Exibe um painel consolidado com as principais estatísticas do canil.
+     */
     public void exibirEstatisticas() {
         // Chama os métodos acima e exibe formatado
         MenuUtil.exibirCabecalho("ESTATÍSTICAS DO CANIL");

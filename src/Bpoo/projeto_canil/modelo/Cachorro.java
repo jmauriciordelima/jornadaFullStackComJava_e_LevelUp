@@ -1,8 +1,8 @@
 package Bpoo.projeto_canil.modelo;
 
 /**
- * Representa um animal do tipo Cachorro no sistema.
- * Contém informações sobre nome, raça, idade e estado comportamental.
+ * Entidade que representa um cachorro no sistema.
+ * Contém regras de negócio para cálculo de idade e identificação de fase da vida.
  */
 public class Cachorro {
 
@@ -102,6 +102,10 @@ public class Cachorro {
         return getIdade() + " anos.";
     }
 
+    /**
+     * Exibe no console as informações detalhadas do cachorro,
+     * incluindo cálculos de idade humana e meses.
+     */
     public void exibirInformacoes() {
         System.out.printf("""
                 Nome: %s\
