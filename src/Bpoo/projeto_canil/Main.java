@@ -191,6 +191,10 @@ public class Main {
                             break;
                     }
 
+                    if (faseVida == null) {
+                        break;
+                    }
+
                     List<Cachorro> lista = service.listarPorFase(faseVida);
                     if (lista.isEmpty()) {
                         MenuUtil.exibirMensagemInfo("NENHUM CACHORRO NESSA FASE");
@@ -215,11 +219,11 @@ public class Main {
                     Cachorro cachorroMaisVelho = service.buscarMaisVelho();
                     Cachorro cachorroMenorIdade = service.buscarMaisNovo();
 
-                    System.out.printf("Mais velho: %s (%d idade)%n",
+                    System.out.printf("MAIS VELHO: %s (%d IDADE)%n",
                             cachorroMaisVelho.getNome(),
                             cachorroMaisVelho.getIdade());
 
-                    System.out.printf("Mais novo: %s (%d idade)%n",
+                    System.out.printf("MAIS NOVO: %s (%d IDADE)%n",
                             cachorroMenorIdade.getNome(),
                             cachorroMenorIdade.getIdade());
 

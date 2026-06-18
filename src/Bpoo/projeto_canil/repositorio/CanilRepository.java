@@ -21,8 +21,14 @@ public class CanilRepository {
 
     private ArrayList<Cachorro> cachorros;
 
+    /**
+     * Construtor padrão da classe {@link CanilRepository}.
+     * <p>
+     * Inicializa a lista interna de cachorros como um novo {@link ArrayList} vazio,
+     * garantindo que o repositório esteja pronto para receber dados desde a sua criação.
+     * </p>
+     */
     public CanilRepository() {
-
         this.cachorros = new ArrayList<>();
     }
 

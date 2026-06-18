@@ -145,18 +145,34 @@ public class Cachorro {
         this.nome = nome;
     }
 
+    /**
+     * Retorna a raça do cachorro.
+     * @return Uma String representando a raça.
+     */
     public String getRaca() {
         return raca;
     }
 
+    /**
+     * Define a raça do cachorro.
+     * @param raca A nova raça a ser atribuída.
+     */
     public void setRaca(String raca) {
         this.raca = raca;
     }
 
+    /**
+     * Retorna a idade atual do cachorro em anos.
+     * @return Um inteiro representando a idade.
+     */
     public int getIdade() {
         return idade;
     }
 
+    /**
+     * Atualiza a idade do cachorro.
+     * @param idade A nova idade a ser definida.
+     */
     public void setIdade(int idade) {
         this.idade = idade;
     }

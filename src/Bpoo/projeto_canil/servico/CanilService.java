@@ -124,15 +124,15 @@ public class CanilService {
         // Chama os métodos acima e exibe formatado
         MenuUtil.exibirCabecalho("ESTATÍSTICAS DO CANIL");
 
-        System.out.println("Total de cachorros: " + repository.quantidadeTotal());
+        System.out.println("TOTAL DE CACHORROS: " + repository.quantidadeTotal());
 
-        System.out.printf("Idade média: %.1f" +
+        System.out.printf("IDADE MÉDIA: %.1f" +
                 "%n", calcularIdadeMedia());
 
         Cachorro maisVelho = buscarMaisVelho();
 
         if (maisVelho != null) {
-            System.out.printf("Mais velho: %s (%d idade.)%n",
+            System.out.printf("MAIS VELHO: %s (%d IDADE.)%n",
                     maisVelho.getNome(),
                     maisVelho.getIdade());
         }
@@ -140,14 +140,14 @@ public class CanilService {
         Cachorro maisNovo = buscarMaisNovo();
 
         if (maisNovo != null) {
-            System.out.printf("Menor idade: %s (%d idade.)%n",
+            System.out.printf("MENOR NOVO: %s (%d IDADE.)%n",
                     maisNovo.getNome(),
                     maisNovo.getIdade());
         }
 
-//        System.out.println("Filhotes: " + listarPorFase("Filhote").size());
-//        System.out.println("Adultos: " + listarPorFase("Adulto").size());
-//        System.out.println("Idosos: " + listarPorFase("Idoso").size());
+        System.out.println("FILHOTES: " + listarPorFase(FaseVida.FILHOTE).size());
+        System.out.println("ADULTOS: " + listarPorFase(FaseVida.ADULTO).size());
+        System.out.println("IDOSOS: " + listarPorFase(FaseVida.IDOSO).size());
     }
 
 }
