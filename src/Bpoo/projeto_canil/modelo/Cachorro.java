@@ -1,5 +1,7 @@
 package Bpoo.projeto_canil.modelo;
 
+import java.util.Objects;
+
 /**
  * Entidade que representa um cachorro cadastrado no sistema.
  * <p>
@@ -12,6 +14,7 @@ package Bpoo.projeto_canil.modelo;
  */
 public class Cachorro {
 
+    private int id;
     private String nome;
     private String raca;
     private int idade;
@@ -41,11 +44,22 @@ public class Cachorro {
      * @param idade A idade em anos.
      */
     public Cachorro(String nome, String raca, int idade) {
-        this.nome = nome;
-        this.raca = raca;
+        this(nome, raca);
         this.idade = idade;
     }
 
+    /**
+     * Construtor utilizado pelo repositório ao carregar dados do arquivo.
+     *
+     * @param id    Identificador único persistido.
+     * @param nome  Nome do cachorro.
+     * @param raca  Raça do cachorro.
+     * @param idade Idade em anos.
+     */
+    public Cachorro(int id, String nome, String raca, int idade) {
+        this(nome, raca, idade);
+        this.id = id;
+    }
 
     /**
      * Determina a fase da vida do cachorro com base na idade.
@@ -91,7 +105,7 @@ public class Cachorro {
     public String fazerAniversario() {
         setIdade((getIdade() + 1));
 
-        return String.format("%s fez aniversário, sua nova idade agora é %s", getNome(), formatarMensagemIdade());
+        return String.format("%s FEZ ANIVERSÁRIO, SUA NOVA IDADE AGORA É %s", getNome(), formatarMensagemIdade());
     }
 
     /**
@@ -101,10 +115,10 @@ public class Cachorro {
      */
     private String formatarMensagemIdade() {
         if (getIdade() == 1) {
-            return getIdade() + " ano.";
+            return getIdade() + " ANO.";
         }
 
-        return getIdade() + " anos.";
+        return getIdade() + " ANOS.";
     }
 
     /**
@@ -113,20 +127,22 @@ public class Cachorro {
      */
     public void exibirInformacoes() {
         System.out.printf("""
-                Nome: %s\
+                ID: %d\
                 
-                Idade: %d\
+                NOME: %s\
                 
-                Fase da vida: %s\
+                IDADE: %d\
                 
-                Idade em meses: %d\
+                FASE DA VIDA: %s\
                 
-                Idade humana: %d\
+                IDADE EM MESES: %d\
                 
-                %s é um %s de %s\
+                IDADE HUMANA: %d\
+                
+                %s É UM %s DE %s\
                 
                 
-                """, getNome(), getIdade(), faseDaVida(), calcularIdadeEmMeses(), calcularIdadeHumana(), getNome(), getRaca(), formatarMensagemIdade());
+                """,getId(), getNome(), getIdade(), faseDaVida(), calcularIdadeEmMeses(), calcularIdadeHumana(), getNome(), getRaca(), formatarMensagemIdade());
     }
 
     /**
@@ -177,4 +193,36 @@ public class Cachorro {
         this.idade = idade;
     }
 
+    /**
+     * Retorna o id
+     * @return Um inteiro representando o id.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Atualiza o id do cachorro.
+     * @param id Um novo id para o cachorro.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "CACHORRO [ID: " + id + ", NOME: " + nome + ", RAÇA: " + raca + ", IDADE: " + idade + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cachorro cachorro = (Cachorro) o;
+        return id == cachorro.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

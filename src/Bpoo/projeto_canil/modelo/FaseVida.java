@@ -7,6 +7,9 @@ package Bpoo.projeto_canil.modelo;
  * Esta enumeração é utilizada para classificar os cachorros com base em sua idade,
  * auxiliando na aplicação de regras de negócio específicas para cada estágio de vida.
  * </p>
+ *
+ * @author José Maurício
+ * @version 1.0
  */
 public enum FaseVida {
 

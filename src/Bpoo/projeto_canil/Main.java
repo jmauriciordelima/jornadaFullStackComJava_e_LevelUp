@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * Classe principal da aplicação.
- *
+ * <p>
  * Responsável por inicializar o sistema,
  * carregar os dados persistidos e controlar
  * o fluxo de execução do programa.
@@ -232,7 +232,6 @@ public class Main {
 
                 case "9":
                     repository.salvarEmArquivo(ARQUIVO);
-                    MenuUtil.exibirMensagemSucesso("- ARQUIVO SALVO COM SUCESSO");
                     break;
 
                 case "0":

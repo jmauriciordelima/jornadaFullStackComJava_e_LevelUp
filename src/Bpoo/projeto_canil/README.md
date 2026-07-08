@@ -32,7 +32,8 @@ src/
 └── Bpoo/
     └── projeto_canil/
         ├── modelo/
-        │   └── Cachorro.java          # Entidade de negócio
+        │   ├── Cachorro.java          # Entidade de negócio
+        │   └── FaseVida.java          # Enum de classificação etária
         │
         ├── repositorio/
         │   └── CanilRepository.java   # Persistência e acesso a dados
@@ -50,7 +51,7 @@ src/
 
 ```
 Main (orquestrador)
-  ├── MenuUtil     → exibição de menus e mensagens
+  ├── MenuUtil        → exibição de menus e mensagens
   ├── CanilRepository → operações CRUD e persistência
   └── CanilService    → estatísticas e regras de negócio
         └── usa CanilRepository internamente
@@ -64,9 +65,17 @@ Main (orquestrador)
 
 **Orientação a Objetos:**
 - Encapsulamento com `private` e getters/setters
-- Múltiplos construtores com sobrecarga
+- Múltiplos construtores com sobrecarga e encadeamento via `this()`
 - Métodos de instância e auxiliares privados
 - Separação de responsabilidades entre classes
+- Enum (`FaseVida`) para type safety na classificação etária
+- Sobrescrita de `toString()`, `equals()` e `hashCode()`
+- Identidade de objetos baseada em ID único sequencial
+
+**Gerenciamento de ID:**
+- ID sequencial gerado e controlado pelo `CanilRepository`
+- Persistência do contador entre execuções via leitura do arquivo
+- Garantia de unicidade sem reaproveitamento de IDs removidos
 
 **Java I/O:**
 - `FileWriter` + `BufferedWriter` + `PrintWriter` para escrita
@@ -76,7 +85,7 @@ Main (orquestrador)
 **Coleções:**
 - `ArrayList<Cachorro>` para armazenamento em memória
 - Algoritmos de busca de máximo/mínimo em coleções de objetos
-- Filtragem de listas por critério
+- Filtragem de listas por critério com type safety via Enum
 
 **Tratamento de Erros:**
 - `try-catch` com `NumberFormatException` para validação de entrada numérica
@@ -124,13 +133,13 @@ java -cp out Bpoo.projeto_canil.Main
 ╔════════════════════════════════╗
 ║     ESTATÍSTICAS DO CANIL      ║
 ╚════════════════════════════════╝
-Total de cachorros: 3
-Idade média: 4.7
-Mais velho: Max (12 anos)
-Mais novo: Bob (1 ano)
-Filhotes: 1
-Adultos: 1
-Idosos: 1
+TOTAL DE CACHORROS: 3
+IDADE MÉDIA: 4.7
+MAIS VELHO: MAX (12 ANOS)
+MAIS NOVO: BOB (1 ANO)
+FILHOTES: 1
+ADULTOS: 1
+IDOSOS: 1
 ```
 
 ---
@@ -140,12 +149,15 @@ Idosos: 1
 Os dados são salvos em `canil.txt` com o seguinte formato CSV:
 
 ```
-REX;LABRADOR;3;
-BOB;POODLE;5;
-MAX;VIRA-LATA;12;
+1;REX;LABRADOR;3;
+2;BOB;POODLE;5;
+3;MAX;VIRA-LATA;12;
 ```
 
-Campos: `nome;raca;idade`
+Campos: `id;nome;raca;idade`
+
+> O ID é sequencial e persistido entre execuções. Ao reiniciar o programa,
+> o sistema identifica o maior ID existente e continua a sequência a partir dele.
 
 ---
 
@@ -157,10 +169,13 @@ cobrindo os seguintes marcos:
 - Fundamentos de Java (loops, condicionais, Scanner)
 - ArrayList e algoritmos de manipulação de coleções
 - Programação Orientada a Objetos do zero ao avançado
+- Enum e type safety
+- Sobrescrita de `toString()`, `equals()` e `hashCode()`
+- Gerenciamento de identidade de objetos com ID sequencial
 - Arquitetura em camadas e separação de responsabilidades
 - Persistência de dados com File I/O
 - Tratamento de exceções
-- Boas práticas: Clean Code, encapsulamento, nomenclatura
+- Boas práticas: Clean Code, Javadoc, encapsulamento, nomenclatura
 
 O sistema evoluiu incrementalmente ao longo do processo, com cada funcionalidade
 sendo implementada, revisada e refatorada — refletindo o ciclo real de desenvolvimento
@@ -170,8 +185,8 @@ de software profissional.
 
 ## 👨‍💻 Autor
 
-José Maurício  
-Desenvolvedor Java em formação  
+José Maurício
+Desenvolvedor Java em formação
 
 🔗 [GitHub](https://github.com/jmauriciordelima/jornadaFullStackComJava_e_LevelUp/tree/main/src/Bpoo/projeto_canil)
 

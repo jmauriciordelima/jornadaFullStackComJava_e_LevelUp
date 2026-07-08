@@ -140,7 +140,7 @@ public class CanilService {
         Cachorro maisNovo = buscarMaisNovo();
 
         if (maisNovo != null) {
-            System.out.printf("MENOR NOVO: %s (%d IDADE.)%n",
+            System.out.printf("MAIS NOVO: %s (%d IDADE.)%n",
                     maisNovo.getNome(),
                     maisNovo.getIdade());
         }

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Responsável pela persistência e gerenciamento
  * dos dados dos cachorros.
- *
+ * <p>
  * Atua como camada de acesso aos dados
  * armazenados em memória e em arquivo.
  *
@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class CanilRepository {
 
+    private int proximoId = 1;
     private ArrayList<Cachorro> cachorros;
 
     /**
@@ -38,7 +39,7 @@ public class CanilRepository {
      * @param cachorro O objeto {@link Cachorro} a ser adicionado.
      */
     public void adicionar(Cachorro cachorro) {
-
+        cachorro.setId(proximoId++);
         cachorros.add(cachorro);
     }
 
@@ -114,7 +115,8 @@ public class CanilRepository {
     public void salvarEmArquivo(String arquivoCachorros) {
         try (PrintWriter escrever = new PrintWriter(new BufferedWriter(new FileWriter(arquivoCachorros)))) {
             for (Cachorro c : cachorros) {
-                escrever.printf("%s;%s;%d;%n",
+                escrever.printf("%d;%s;%s;%d;%n",
+                        c.getId(),
                         c.getNome(),
                         c.getRaca(),
                         c.getIdade());
@@ -131,7 +133,7 @@ public class CanilRepository {
     /**
      * Carrega todos os registros persistidos
      * em arquivo texto.
-     *
+     * <p>
      * Caso o arquivo não exista,
      * retorna uma lista vazia.
      *
@@ -150,12 +152,17 @@ public class CanilRepository {
             String linha;
             while ((linha = ler.readLine()) != null) {
                 String[] dados = linha.split(";");
-                if (dados.length == 3) {
-                    String nome = dados[0];
-                    String raca = dados[1];
-                    int idade = Integer.parseInt(dados[2]);
+                if (dados.length == 4) {
+                    int id = Integer.parseInt(dados[0]);
+                    String nome = dados[1];
+                    String raca = dados[2];
+                    int idade = Integer.parseInt(dados[3]);
 
-                    cachorros.add(new Cachorro(nome, raca, idade));
+                    cachorros.add(new Cachorro(id, nome, raca, idade));
+
+                    if (id >= proximoId) {
+                        proximoId = id + 1;
+                    }
                 }
             }
 
