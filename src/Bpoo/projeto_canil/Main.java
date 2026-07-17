@@ -60,9 +60,8 @@ public class Main {
                     System.out.print("INFORME A IDADE DO CACHORRO > ");
                     try {
                         int idade = Integer.parseInt(scanner.nextLine());
-                        Cachorro cachorro = new Cachorro(nome, raca, idade);
-                        repository.adicionar(cachorro);
-                        MenuUtil.exibirMensagemSucesso("[" + cachorro.getNome() + "] - ADICIONADO COM SUCESSO.");
+                        repository.adicionar(nome, raca, idade);
+                        MenuUtil.exibirMensagemSucesso("[" + nome + "] - ADICIONADO COM SUCESSO.");
                     } catch (NumberFormatException e) {
                         MenuUtil.exibirMensagemErro(" CARACTERE INVÁLIDO " + e);
                     }
@@ -217,15 +216,15 @@ public class Main {
                     MenuUtil.exibirCabecalho("MAIS VELHO / MAIS NOVO");
 
                     Cachorro cachorroMaisVelho = service.buscarMaisVelho();
-                    Cachorro cachorroMenorIdade = service.buscarMaisNovo();
+                    Cachorro cachorroMaisNovo = service.buscarMaisNovo();
 
                     System.out.printf("MAIS VELHO: %s (%d IDADE)%n",
                             cachorroMaisVelho.getNome(),
                             cachorroMaisVelho.getIdade());
 
                     System.out.printf("MAIS NOVO: %s (%d IDADE)%n",
-                            cachorroMenorIdade.getNome(),
-                            cachorroMenorIdade.getIdade());
+                            cachorroMaisNovo.getNome(),
+                            cachorroMaisNovo.getIdade());
 
                     break;
                 }
@@ -235,23 +234,44 @@ public class Main {
                     break;
 
                 case "0":
-                    System.out.println("DESEJA SALVAR ANTES DE SAIR? (S/N)");
-                    String resposta = scanner.nextLine().toUpperCase();
 
-                    if (resposta.equals("S")) {
-                        repository.salvarEmArquivo(ARQUIVO);
-                        System.out.println("ATÉ LOGO");
-                        MenuUtil.exibirCabecalho("FINALIZANDO...");
-                        executando = false;
-                    } else if (resposta.equals("N")) {
-                        System.out.println("ATÉ LOGO");
-                        MenuUtil.exibirCabecalho("FINALIZANDO...");
-                        executando = false;
-                    }
+                    String resposta;
+
+                    do {
+
+                        System.out.println("DESEJA SALVAR ANTES DE SAIR? (S/N)");
+                        resposta = scanner.nextLine().toUpperCase();
+
+                        switch (resposta) {
+
+                            case "S":
+                                repository.salvarEmArquivo(ARQUIVO);
+                                System.out.println("ATÉ LOGO");
+                                MenuUtil.exibirCabecalho("FINALIZANDO...");
+                                executando = false;
+                                break;
+                            case "N":
+                                System.out.println("ATÉ LOGO");
+                                MenuUtil.exibirCabecalho("FINALIZANDO...");
+                                executando = false;
+                                break;
+
+                            default:
+                                MenuUtil.exibirMensagemErro("OPÇÃO INVÁLIDA! DIGITE APENAS [S] OU [N]");
+                                break;
+                        }
+
+                        break;
+
+                    } while ((!resposta.equalsIgnoreCase("S") && !resposta.equalsIgnoreCase("N")));
+
                     break;
 
                 default:
-                    MenuUtil.exibirMensagemErro("OPÇÃO INVÁLIDA!");
+                    if (executando) {
+                        MenuUtil.exibirMensagemErro("OPÇÃO INVÁLIDA!");
+                    }
+
 
             }
 
