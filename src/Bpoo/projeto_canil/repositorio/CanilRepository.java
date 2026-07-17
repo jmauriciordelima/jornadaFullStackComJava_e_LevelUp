@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Responsável pela persistência e gerenciamento
- * dos dados dos cachorros.
+ * Responsável pela persistência e gerenciamento dos dados dos cachorros.
  * <p>
- * Atua como camada de acesso aos dados
- * armazenados em memória e em arquivo.
+ * Esta classe atua como a camada de acesso aos dados, gerenciando tanto a
+ * lista em memória quanto a persistência em arquivos físicos.
+ * Também é responsável por garantir a unicidade dos identificadores (IDs)
+ * dos cachorros cadastrados.
+ * </p>
  *
  * @author José Maurício
- * @version 1.0
+ * @version 1.1
  */
 public class CanilRepository {
 
@@ -23,10 +25,9 @@ public class CanilRepository {
     private ArrayList<Cachorro> cachorros;
 
     /**
-     * Construtor padrão da classe {@link CanilRepository}.
+     * Construtor padrão que inicializa um repositório vazio.
      * <p>
-     * Inicializa a lista interna de cachorros como um novo {@link ArrayList} vazio,
-     * garantindo que o repositório esteja pronto para receber dados desde a sua criação.
+     * Garante que a lista interna de cachorros esteja pronta para receber dados.
      * </p>
      */
     public CanilRepository() {
@@ -34,12 +35,20 @@ public class CanilRepository {
     }
 
     /**
-     * Adiciona um novo cachorro ao repositório em memória.
+     * Adiciona um novo cachorro ao sistema.
+     * <p>
+     * Este método cria uma nova instância de {@link Cachorro} utilizando o identificador
+     * atual do sistema, incrementa o contador de IDs para a próxima inserção e
+     * armazena o objeto na lista de cachorros.
+     * </p>
      *
-     * @param cachorro O objeto {@link Cachorro} a ser adicionado.
+     * @param nome  O nome do cachorro a ser cadastrado.
+     * @param raca  A raça do cachorro.
+     * @param idade A idade inicial do cachorro em anos.
      */
-    public void adicionar(Cachorro cachorro) {
-        cachorro.setId(proximoId++);
+    public void adicionar(String nome, String raca, int idade) {
+        Cachorro cachorro = new Cachorro(proximoId, nome, raca, idade);
+        proximoId++;
         cachorros.add(cachorro);
     }
 
@@ -108,9 +117,12 @@ public class CanilRepository {
     }
 
     /**
-     * Salva todos os cachorros atuais do sistema em um arquivo .txt.
+     * Salva todos os registros atuais em um arquivo texto especificado.
+     * <p>
+     * O formato de salvamento inclui o ID, nome, raça e idade do animal.
+     * </p>
      *
-     * @param arquivoCachorros Nome do arquivo de destino.
+     * @param arquivoCachorros O caminho ou nome do arquivo onde os dados serão salvos.
      */
     public void salvarEmArquivo(String arquivoCachorros) {
         try (PrintWriter escrever = new PrintWriter(new BufferedWriter(new FileWriter(arquivoCachorros)))) {
@@ -131,14 +143,15 @@ public class CanilRepository {
     }
 
     /**
-     * Carrega todos os registros persistidos
-     * em arquivo texto.
+     * Carrega os registros persistidos de um arquivo texto.
      * <p>
-     * Caso o arquivo não exista,
-     * retorna uma lista vazia.
+     * Ao carregar, este método automaticamente atualiza o contador interno
+     * ({@code proximoId}) para assegurar que novos registros continuem a
+     * sequência correta. Caso o arquivo não exista, retorna uma lista vazia.
+     * </p>
      *
-     * @param arquivoCachorro caminho do arquivo.
-     * @return lista de cachorros carregados.
+     * @param arquivoCachorro O caminho ou nome do arquivo de dados.
+     * @return Uma lista contendo os cachorros carregados do arquivo.
      */
     public List<Cachorro> carregarDeArquivo(String arquivoCachorro) {
         this.cachorros = new ArrayList<>();
@@ -171,6 +184,5 @@ public class CanilRepository {
         }
         return cachorros;
     }
-
 
 }
