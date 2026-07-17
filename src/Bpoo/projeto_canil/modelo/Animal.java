@@ -20,6 +20,7 @@ public abstract class Animal {
 
     /**
      * Retorna o id
+     *
      * @return Um inteiro representando o id.
      */
     public int getId() {
@@ -35,6 +36,7 @@ public abstract class Animal {
 
     /**
      * Retorna a idade atual do Animal em anos.
+     *
      * @return Um inteiro representando a idade.
      */
     public int getIdade() {
@@ -43,6 +45,7 @@ public abstract class Animal {
 
     /**
      * Atualiza o id do animal.
+     *
      * @param id Um novo id para o animal.
      */
     public void setId(int id) {
@@ -60,6 +63,7 @@ public abstract class Animal {
 
     /**
      * Atualiza a idade do animal.
+     *
      * @param idade A nova idade a ser definida.
      */
     public void setIdade(int idade) {

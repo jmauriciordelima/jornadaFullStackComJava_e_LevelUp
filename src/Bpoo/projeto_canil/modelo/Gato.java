@@ -13,9 +13,11 @@ import java.util.Objects;
  * @author José Maurício
  * @version 1.0
  */
-public class Gato extends Animal{
+public class Gato extends Animal {
 
-    /** Indica se o gato passou pelo procedimento de castração. */
+    /**
+     * Indica se o gato passou pelo procedimento de castração.
+     */
     private boolean castrado = false;
 
     /**
@@ -102,6 +104,7 @@ public class Gato extends Animal{
 
     /**
      * Verifica o status de castração.
+     *
      * @return {@code true} se castrado, {@code false} caso contrário.
      */
     public boolean isCastrado() {
@@ -110,6 +113,7 @@ public class Gato extends Animal{
 
     /**
      * Define o status de castração.
+     *
      * @param castrado novo status de castração.
      */
     public void setCastrado(boolean castrado) {
@@ -118,6 +122,7 @@ public class Gato extends Animal{
 
     /**
      * Retorna a representação textual do objeto Gato.
+     *
      * @return String formatada contendo o estado do objeto.
      */
     @Override
@@ -141,6 +146,7 @@ public class Gato extends Animal{
 
     /**
      * Gera o código hash do objeto baseado no ID.
+     *
      * @return hash code do ID.
      */
     @Override
